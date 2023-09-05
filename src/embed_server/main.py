@@ -279,7 +279,7 @@ async def render_embed(
         else:
             tags[key] = value or tags[key]
         if value is None:
-            del tags[key]
+            tags.pop(key, None)
         elif not isinstance(value, (str, int, float, bool, list, dict, tuple, type(None))):
             tags[key] = str(value)
     if json:
