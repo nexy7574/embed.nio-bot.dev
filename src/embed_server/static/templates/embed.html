@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if embed.title %}
+        <title>{{ embed.title }}</title>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if embed.description %}
+        <meta name="description" content="{{ embed.description }}">
+    {% endif %}
+
+    <meta property="og:type" content="article">
+    {% for og_tag, value in embed.og_tags.items() %}
+        <meta property="og:{{ og_tag }}" content="{{ value }}">
+    {% endfor %}
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        div {
+            padding: 1em;
+            border-left: 4px solid {{ embed.colour_hex }};
+            border-radius: 1em;
+            background: {{ embed.colour_hex }}33;
+            max-width: fit-content;
+        }
+        #f {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: fit-content;
+            width: fit-content;
+        }
+        img {
+            max-height: 256px;
+            max-width: 256px;
+            min-width: 32px;
+            min-height: 32px;
+        }
+    </style>
+</head>
+<body>
+<div id="f">
+    <!--
+    STOP!
+
+    You do not need to perform HTML scraping in order to embed a page yourself.
+    Instead, you can request `/embed/{{ code }}` with `Accept: application/json` in your headers, and get the
+    embed data in JSON format!
+    -->
+    <div>
+        {% if embed.title %}
+            <h1>{{ embed.title }}</h1>
+        {% endif %}
+        {% if embed.description %}
+            <p>{{ embed.description }}</p>
+        {% endif %}
+    </div>
+    {% if embed.media_url %}
+    <div>
+        <img src="{{ embed.media_url }}" alt="Media">
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
